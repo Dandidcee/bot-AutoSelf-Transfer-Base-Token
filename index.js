@@ -8,8 +8,6 @@ const AMOUNT                   = process.env.AMOUNT || "1";
 const REPEAT_COUNT             = parseInt(process.env.REPEAT_COUNT) || 1;
 const DELAY_BETWEEN_WALLETS_MS = parseInt(process.env.DELAY_BETWEEN_WALLETS_MS) || 1000;
 const DELAY_BETWEEN_ROUNDS_MS  = parseInt(process.env.DELAY_BETWEEN_TX_MS) || 1000;
-const TEST_MODE                = process.env.TEST_MODE === "true";
-const TEST_TIME                = process.env.TEST_TIME || "00:00";
 
 const ERC20_ABI = [
   "function transfer(address to, uint256 amount) returns (bool)",
@@ -195,15 +193,13 @@ async function runBot() {
 }
 
 async function main() {
-  const targetTime  = TEST_MODE ? TEST_TIME : "00:00";
-  const targetLabel = TEST_MODE ? `${TEST_TIME}:00 WIB (TEST)` : `00:00:00 WIB`;
-  const msLeft      = getMsUntilTargetWIB(targetTime);
+  const msLeft = getMsUntilTargetWIB("00:00");
 
   console.log(divider("═"));
   console.log("   SELF TRANSFER BOT  |  MODE TERJADWAL");
   console.log(divider("═"));
   console.log(`🕐 Sekarang    : ${now()}`);
-  console.log(`🎯 Eksekusi    : ${targetLabel}`);
+  console.log(`🎯 Eksekusi    : 00:00:00 WIB`);
   console.log(divider("═"));
   console.log("   Bot standby... (Ctrl+C untuk batal)\n");
 
